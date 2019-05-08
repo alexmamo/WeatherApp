@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:baselineAligned="false"
+    android:padding="8dp"
+    android:background="@drawable/gradient">
+
+    <LinearLayout android:id="@+id/left_linear_layout"
+        style="@style/LeftCenterRightLayoutStyle"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView android:id="@+id/date_text_view"
+            style="@style/DetailTextViewStyle"
+            android:textSize="12sp"/>
+
+        <TextView android:id="@+id/time_text_view"
+            style="@style/DetailTextViewStyle"
+            android:textSize="30sp"/>
+    </LinearLayout>
+
+    <RelativeLayout android:id="@+id/center_relative_layout"
+        style="@style/LeftCenterRightLayoutStyle">
+
+        <TextView android:id="@+id/temperature_text_view"
+            style="@style/DetailTextViewStyle"
+            android:textSize="45sp"
+            android:layout_centerInParent="true"/>
+
+        <TextView android:id="@+id/min_text_view"
+            style="@style/DetailTextViewStyle"
+            android:layout_below="@+id/temperature_text_view"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView android:id="@+id/max_text_view"
+            style="@style/DetailTextViewStyle"
+            android:layout_below="@+id/min_text_view"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+    <LinearLayout android:id="@+id/right_linear_layout"
+        style="@style/LeftCenterRightLayoutStyle"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView android:id="@+id/sun_image_view"
+            android:layout_width="@dimen/sun_image_view_width_and_height"
+            android:layout_height="@dimen/sun_image_view_width_and_height"
+            android:background="@drawable/ic_wb_sunny_white_24dp"
+            tools:ignore="ContentDescription" />
+
+        <TextView android:id="@+id/weather_text_view"
+            style="@style/DetailTextViewStyle"/>
+
+        <TextView android:id="@+id/wind_text_view"
+            style="@style/DetailTextViewStyle"/>
+
+        <TextView android:id="@+id/pressure_text_view"
+            style="@style/DetailTextViewStyle"/>
+
+        <TextView android:id="@+id/humidity_text_view"
+            style="@style/DetailTextViewStyle"/>
+    </LinearLayout>
+</LinearLayout>
