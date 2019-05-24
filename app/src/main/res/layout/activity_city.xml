@@ -47,8 +47,8 @@
         android:gravity="center">
 
         <ImageView android:id="@+id/sun_image_view"
-            android:layout_width="@dimen/sun_image_view_width_and_height"
-            android:layout_height="@dimen/sun_image_view_width_and_height"
+            android:layout_width="@dimen/app_image_view_dimen"
+            android:layout_height="@dimen/app_image_view_dimen"
             android:background="@drawable/ic_wb_sunny_white_24dp"
             tools:ignore="ContentDescription" />
 

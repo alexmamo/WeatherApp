@@ -37,7 +37,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
     @Override
     public void onBindViewHolder(@NonNull CityViewHolder cityViewHolder, int position) {
         City city = cityList.get(position);
-        cityViewHolder.bind(city);
+        cityViewHolder.bindCity(city);
     }
 
     @Override
@@ -45,26 +45,33 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
         return cityList.size();
     }
 
-    class CityViewHolder extends RecyclerView.ViewHolder {
-        View itemView;
+    class CityViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView cityImageView;
         TextView cityNameTextView;
 
         CityViewHolder(View itemView) {
             super(itemView);
-            this.itemView = itemView;
+            itemView.setOnClickListener(this);
             cityImageView = itemView.findViewById(R.id.city_image_view);
             cityNameTextView = itemView.findViewById(R.id.city_name_text_view);
         }
 
-        void bind(City city) {
+        void bindCity(City city) {
             Glide.with(context).load(city.imageUrl).into(cityImageView);
             cityNameTextView.setText(city.cityName);
-            itemView.setOnClickListener(view -> {
-                Intent cityActivityIntent = new Intent(context, CityActivity.class);
-                cityActivityIntent.putExtra("city", city);
-                context.startActivity(cityActivityIntent);
-            });
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = getLayoutPosition();
+            City clickedCity = cityList.get(position);
+            goToCityActivity(clickedCity);
+        }
+
+        private void goToCityActivity(City city) {
+            Intent cityActivityIntent = new Intent(context, CityActivity.class);
+            cityActivityIntent.putExtra("city", city);
+            context.startActivity(cityActivityIntent);
         }
     }
 }
