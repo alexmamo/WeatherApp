@@ -1,7 +1,6 @@
 package ro.alexmamo.weatherapp.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,23 +14,24 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import ro.alexmamo.weatherapp.R;
-import ro.alexmamo.weatherapp.activities.CityActivity;
 import ro.alexmamo.weatherapp.models.City;
 
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder> {
     private Context context;
     private List<City> cityList;
+    private OnCityClickListener onCityClickListener;
 
-    public CityAdapter(Context context, List<City> cityList) {
+    public CityAdapter(Context context, List<City> cityList, OnCityClickListener onCityClickListener) {
         this.context = context;
         this.cityList = cityList;
+        this.onCityClickListener = onCityClickListener;
     }
 
     @NonNull
     @Override
     public CityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_city, parent, false);
-        return new CityViewHolder(view);
+        return new CityViewHolder(view, onCityClickListener);
     }
 
     @Override
@@ -48,12 +48,14 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
     class CityViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView cityImageView;
         TextView cityNameTextView;
+        OnCityClickListener onCityClickListener;
 
-        CityViewHolder(View itemView) {
+        CityViewHolder(View itemView, OnCityClickListener onCityClickListener) {
             super(itemView);
-            itemView.setOnClickListener(this);
             cityImageView = itemView.findViewById(R.id.city_image_view);
             cityNameTextView = itemView.findViewById(R.id.city_name_text_view);
+            this.onCityClickListener = onCityClickListener;
+            itemView.setOnClickListener(this);
         }
 
         void bindCity(City city) {
@@ -62,16 +64,13 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
         }
 
         @Override
-        public void onClick(View view) {
-            int position = getLayoutPosition();
-            City clickedCity = cityList.get(position);
-            goToCityActivity(clickedCity);
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            onCityClickListener.onCityClick(position);
         }
+    }
 
-        private void goToCityActivity(City city) {
-            Intent cityActivityIntent = new Intent(context, CityActivity.class);
-            cityActivityIntent.putExtra("city", city);
-            context.startActivity(cityActivityIntent);
-        }
+    public interface OnCityClickListener {
+        void onCityClick(int position);
     }
 }
