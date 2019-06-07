@@ -14,13 +14,13 @@
         android:allowBackup="true"
         android:fullBackupContent="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.CitiesActivity">
+        <activity android:name=".views.CitiesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CityActivity" android:exported="false"/>
+        <activity android:name=".views.CityActivity" android:exported="false"/>
     </application>
 </manifest>

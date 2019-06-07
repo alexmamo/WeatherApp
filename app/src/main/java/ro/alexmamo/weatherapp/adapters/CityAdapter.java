@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import ro.alexmamo.weatherapp.R;
-import ro.alexmamo.weatherapp.models.City;
+import ro.alexmamo.weatherapp.pojos.City;
 
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder> {
     private Context context;
@@ -52,25 +52,38 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
 
         CityViewHolder(View itemView, OnCityClickListener onCityClickListener) {
             super(itemView);
-            cityImageView = itemView.findViewById(R.id.city_image_view);
-            cityNameTextView = itemView.findViewById(R.id.city_name_text_view);
             this.onCityClickListener = onCityClickListener;
             itemView.setOnClickListener(this);
+            initViews();
+        }
+
+        void initViews() {
+            cityImageView = itemView.findViewById(R.id.city_image_view);
+            cityNameTextView = itemView.findViewById(R.id.city_name_text_view);
         }
 
         void bindCity(City city) {
-            Glide.with(context).load(city.imageUrl).into(cityImageView);
-            cityNameTextView.setText(city.cityName);
+            setCityImageView(city.imageUrl);
+            setCityNameTextView(city.cityName);
+        }
+
+        void setCityImageView(String imageUrl) {
+            Glide.with(context).load(imageUrl).into(cityImageView);
+        }
+
+        void setCityNameTextView(String cityName) {
+            cityNameTextView.setText(cityName);
         }
 
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            onCityClickListener.onCityClick(position);
+            City clickedCity = cityList.get(position);
+            onCityClickListener.onCityClick(clickedCity);
         }
     }
 
     public interface OnCityClickListener {
-        void onCityClick(int position);
+        void onCityClick(City clickedCity);
     }
 }
