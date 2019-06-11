@@ -1,19 +1,23 @@
 package ro.alexmamo.weatherapp.views;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import ro.alexmamo.weatherapp.CurrentWeatherViewModelFactory;
 import ro.alexmamo.weatherapp.R;
-import ro.alexmamo.weatherapp.contracts.CityActivityContract;
-import ro.alexmamo.weatherapp.pojos.City;
-import ro.alexmamo.weatherapp.presenters.CityActivityPresenter;
+import ro.alexmamo.weatherapp.models.City;
+import ro.alexmamo.weatherapp.models.CurrentWeather;
+import ro.alexmamo.weatherapp.viewmodels.CurrentWeatherViewModel;
 
-public class CityActivity extends AppCompatActivity implements CityActivityContract.View {
-    private City city;
+public class CityActivity extends AppCompatActivity {
     private TextView dateTextView, timeTextView, temperatureTextView, minTextView, maxTextView, weatherTextView, windTextView, pressureTextView, humidityTextView;
+    private City city;
+    private CurrentWeatherViewModel citiesViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +26,8 @@ public class CityActivity extends AppCompatActivity implements CityActivityContr
         enableHomeButton();
         city = getCityFromIntent();
         setTitle(city.cityName);
-        initCityActivityPresenter();
+        initViews();
+        addCitiesToList();
     }
 
     private void enableHomeButton() {
@@ -36,12 +41,6 @@ public class CityActivity extends AppCompatActivity implements CityActivityContr
         return (City) getIntent().getSerializableExtra("city");
     }
 
-    private void initCityActivityPresenter() {
-        CityActivityPresenter presenter = new CityActivityPresenter(city, this);
-        presenter.setWeatherDataToViews();
-    }
-
-    @Override
     public void initViews() {
         dateTextView = findViewById(R.id.date_text_view);
         timeTextView = findViewById(R.id.time_text_view);
@@ -54,39 +53,77 @@ public class CityActivity extends AppCompatActivity implements CityActivityContr
         humidityTextView = findViewById(R.id.humidity_text_view);
     }
 
-    @Override
-    public void setDateAndTimeTextViews(String dayOfTheWeekAndCurrentDate, String time) {
+    public void addCitiesToList() {
+        citiesViewModel = ViewModelProviders.of(this, new CurrentWeatherViewModelFactory(this.getApplication(), city)).get(CurrentWeatherViewModel.class);
+        LiveData<CurrentWeather> currentWeatherLiveData = citiesViewModel.getCurrentWeatherLiveData();
+        currentWeatherLiveData.observe(this, currentWeather -> {
+            if (currentWeather != null) {
+                setDataToViews(currentWeather);
+            }
+        });
+    }
+
+    private void setDataToViews(CurrentWeather currentWeather) {
+        String[] dateAndTime = citiesViewModel.getDateAndTime();
+        String dayOfTheWeekAndCurrentDate = dateAndTime[0];
+        setDateTextViews(dayOfTheWeekAndCurrentDate);
+        String time = dateAndTime[1];
+        setTimeTextViews(time);
+
+        String temp = citiesViewModel.getTemperature(currentWeather);
+        setTemperatureTextView(temp);
+
+        String min = citiesViewModel.getMin(currentWeather);
+        setMinTextViews(min);
+
+        String max = citiesViewModel.getMax(currentWeather);
+        setMaxTextViews(max);
+
+        String weather = citiesViewModel.getWeather(currentWeather);
+        setWeatherTextView(weather);
+
+        String wind = citiesViewModel.getWind(currentWeather);
+        setWindTextView(wind);
+
+        String pressure = citiesViewModel.getPressure(currentWeather);
+        setPressureTextView(pressure);
+
+        String humidity = citiesViewModel.getHumidity(currentWeather);
+        setHumidityTextView(humidity);
+    }
+
+    public void setDateTextViews(String dayOfTheWeekAndCurrentDate) {
         dateTextView.setText(dayOfTheWeekAndCurrentDate);
+    }
+
+    public void setTimeTextViews(String time) {
         timeTextView.setText(time);
     }
 
-    @Override
     public void setTemperatureTextView(String temp) {
         temperatureTextView.setText(temp);
     }
 
-    @Override
-    public void setMinAndMaxTextViews(String min, String max) {
+    public void setMinTextViews(String min) {
         minTextView.setText(min);
+    }
+
+    public void setMaxTextViews(String max) {
         maxTextView.setText(max);
     }
 
-    @Override
     public void setWeatherTextView(String weather) {
         weatherTextView.setText(weather);
     }
 
-    @Override
     public void setWindTextView(String wind) {
         windTextView.setText(wind);
     }
 
-    @Override
     public void setPressureTextView(String pressure) {
         pressureTextView.setText(pressure);
     }
 
-    @Override
     public void setHumidityTextView(String humidity) {
         humidityTextView.setText(humidity);
     }

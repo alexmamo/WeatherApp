@@ -1,14 +1,12 @@
-package ro.alexmamo.weatherapp.models;
+package ro.alexmamo.weatherapp.data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ro.alexmamo.weatherapp.contracts.CitiesActivityContract;
-import ro.alexmamo.weatherapp.pojos.City;
+import ro.alexmamo.weatherapp.models.City;
 
-public class CitiesActivityModel implements CitiesActivityContract.Model {
-    @Override
-    public List<City> getCityList() {
+public class Cities {
+    public static List<City> getCityList() {
         List<City> cityList = new ArrayList<>();
         cityList.add(new City("Brasov", "https://www.alexmamo.ro/apps/WeatherApp/CityImages/Brasov.jpg"));
         cityList.add(new City("Bucharest", "https://www.alexmamo.ro/apps/WeatherApp/CityImages/Bucharest.jpg"));

@@ -1,4 +1,4 @@
-package ro.alexmamo.weatherapp.pojos;
+package ro.alexmamo.weatherapp.models;
 
 import java.io.Serializable;
 

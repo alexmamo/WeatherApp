@@ -1,5 +1,7 @@
 package ro.alexmamo.weatherapp.views;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,43 +11,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ro.alexmamo.weatherapp.R;
-import ro.alexmamo.weatherapp.adapters.CityAdapter;
-import ro.alexmamo.weatherapp.contracts.CitiesActivityContract;
-import ro.alexmamo.weatherapp.pojos.City;
-import ro.alexmamo.weatherapp.presenters.CitiesActivityPresenter;
+import ro.alexmamo.weatherapp.models.City;
+import ro.alexmamo.weatherapp.viewmodels.CitiesViewModel;
 
-public class CitiesActivity extends AppCompatActivity implements CitiesActivityContract.View, CityAdapter.OnCityClickListener {
+public class CitiesActivity extends AppCompatActivity implements CityAdapter.OnCityClickListener {
+    private RecyclerView citiesRecyclerView;
     private List<City> cityList = new ArrayList<>();
     private CityAdapter cityAdapter;
-    private RecyclerView citiesRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cities);
-        initCitiesActivityPresenter();
+        initCitiesRecyclerView();
+        initCityAdapter();
+        addCitiesToList();
     }
 
-    private void initCitiesActivityPresenter() {
-        CitiesActivityPresenter presenter = new CitiesActivityPresenter(this);
-        presenter.getCityList();
-    }
-
-    @Override
     public void initCitiesRecyclerView() {
         citiesRecyclerView = findViewById(R.id.cities_recycler_view);
     }
 
-    @Override
     public void initCityAdapter() {
         cityAdapter = new CityAdapter(this, cityList, this);
         citiesRecyclerView.setAdapter(cityAdapter);
     }
 
-    @Override
-    public void addCitiesToList(List<City> cities) {
-        cityList.addAll(cities);
-        cityAdapter.notifyDataSetChanged();
+    public void addCitiesToList() {
+        CitiesViewModel citiesViewModel = ViewModelProviders.of(this).get(CitiesViewModel.class);
+        LiveData<List<City>> cityLiveData = citiesViewModel.getCitiesLiveData();
+        cityLiveData.observe(this, cities -> {
+            if (cities != null) {
+                cityList.addAll(cities);
+                cityAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
