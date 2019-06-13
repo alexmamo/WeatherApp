@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ro.alexmamo.weatherapp.R;
-import ro.alexmamo.weatherapp.adapters.CityAdapter;
 import ro.alexmamo.weatherapp.contracts.CitiesActivityContract;
 import ro.alexmamo.weatherapp.pojos.City;
 import ro.alexmamo.weatherapp.presenters.CitiesActivityPresenter;

@@ -1,4 +1,4 @@
-package ro.alexmamo.weatherapp.adapters;
+package ro.alexmamo.weatherapp.views;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -21,7 +21,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.CityViewHolder
     private List<City> cityList;
     private OnCityClickListener onCityClickListener;
 
-    public CityAdapter(Context context, List<City> cityList, OnCityClickListener onCityClickListener) {
+    CityAdapter(Context context, List<City> cityList, OnCityClickListener onCityClickListener) {
         this.context = context;
         this.cityList = cityList;
         this.onCityClickListener = onCityClickListener;
