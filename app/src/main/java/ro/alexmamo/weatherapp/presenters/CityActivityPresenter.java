@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import okhttp3.ResponseBody;
 import ro.alexmamo.weatherapp.contracts.CityActivityContract;
 import ro.alexmamo.weatherapp.models.CityActivityModel;
 import ro.alexmamo.weatherapp.pojos.City;
@@ -16,15 +17,9 @@ public class CityActivityPresenter implements CityActivityContract.Presenter {
     private CityActivityContract.View view;
     private CityActivityModel model;
 
-    public CityActivityPresenter(City city, CityActivityContract.View view) {
+    public CityActivityPresenter(City city) {
         this.city = city;
-        this.view = view;
-        initViews();
         initCityActivityModel();
-    }
-
-    private void initViews() {
-        view.initViews();
     }
 
     private void initCityActivityModel() {
@@ -32,15 +27,45 @@ public class CityActivityPresenter implements CityActivityContract.Presenter {
     }
 
     @Override
+    public void attachView(CityActivityContract.View view) {
+        this.view = view;
+        initViews();
+    }
+
+    private void initViews() {
+        view.initViews();
+    }
+
+    @Override
+    public void detachView() {
+        view = null;
+    }
+
+    @Override
+    public boolean isViewAttached() {
+        return view != null;
+    }
+
+    @Override
     public void setWeatherDataToViews() {
-        model.getCurrentWeather(city, currentWeather -> {
-            setDateAndTime();
-            setTemperature(currentWeather);
-            setMinAndMax(currentWeather);
-            setWeather(currentWeather);
-            setWind(currentWeather);
-            setPressure(currentWeather);
-            setHumidity(currentWeather);
+        model.getResponse(city, response -> {
+            if (response.isSuccessful()) {
+                CurrentWeather currentWeather = response.body();
+                if (currentWeather != null) {
+                    setDateAndTime();
+                    setTemperature(currentWeather);
+                    setMinAndMax(currentWeather);
+                    setWeather(currentWeather);
+                    setWind(currentWeather);
+                    setPressure(currentWeather);
+                    setHumidity(currentWeather);
+                }
+            } else {
+                ResponseBody responseBody = response.errorBody();
+                if (responseBody != null) {
+                    view.toastError(responseBody.toString());
+                }
+            }
         });
     }
 

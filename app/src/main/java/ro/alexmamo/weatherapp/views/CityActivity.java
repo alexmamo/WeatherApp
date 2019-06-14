@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ro.alexmamo.weatherapp.R;
 import ro.alexmamo.weatherapp.contracts.CityActivityContract;
@@ -13,6 +14,7 @@ import ro.alexmamo.weatherapp.presenters.CityActivityPresenter;
 
 public class CityActivity extends AppCompatActivity implements CityActivityContract.View {
     private City city;
+    private CityActivityPresenter presenter;
     private TextView dateTextView, timeTextView, temperatureTextView, minTextView, maxTextView, weatherTextView, windTextView, pressureTextView, humidityTextView;
 
     @Override
@@ -37,7 +39,8 @@ public class CityActivity extends AppCompatActivity implements CityActivityContr
     }
 
     private void initCityActivityPresenter() {
-        CityActivityPresenter presenter = new CityActivityPresenter(city, this);
+        presenter = new CityActivityPresenter(city);
+        presenter.attachView(this);
         presenter.setWeatherDataToViews();
     }
 
@@ -56,39 +59,58 @@ public class CityActivity extends AppCompatActivity implements CityActivityContr
 
     @Override
     public void setDateAndTimeTextViews(String dayOfTheWeekAndCurrentDate, String time) {
-        dateTextView.setText(dayOfTheWeekAndCurrentDate);
-        timeTextView.setText(time);
+        if (presenter.isViewAttached()) {
+            dateTextView.setText(dayOfTheWeekAndCurrentDate);
+            timeTextView.setText(time);
+        }
     }
 
     @Override
     public void setTemperatureTextView(String temp) {
-        temperatureTextView.setText(temp);
+        if (presenter.isViewAttached()) {
+            temperatureTextView.setText(temp);
+        }
     }
 
     @Override
     public void setMinAndMaxTextViews(String min, String max) {
-        minTextView.setText(min);
-        maxTextView.setText(max);
+        if (presenter.isViewAttached()) {
+            minTextView.setText(min);
+            maxTextView.setText(max);
+        }
     }
 
     @Override
     public void setWeatherTextView(String weather) {
-        weatherTextView.setText(weather);
+        if (presenter.isViewAttached()) {
+            weatherTextView.setText(weather);
+        }
     }
 
     @Override
     public void setWindTextView(String wind) {
-        windTextView.setText(wind);
+        if (presenter.isViewAttached()) {
+            windTextView.setText(wind);
+        }
     }
 
     @Override
     public void setPressureTextView(String pressure) {
-        pressureTextView.setText(pressure);
+        if (presenter.isViewAttached()) {
+            pressureTextView.setText(pressure);
+        }
     }
 
     @Override
     public void setHumidityTextView(String humidity) {
-        humidityTextView.setText(humidity);
+        if (presenter.isViewAttached()) {
+            humidityTextView.setText(humidity);
+        }
+    }
+
+    @Override
+    public void toastError(String errorMessage) {
+        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -98,5 +120,11 @@ public class CityActivity extends AppCompatActivity implements CityActivityContr
             return true;
         }
         return super.onOptionsItemSelected(menuItem);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
     }
 }

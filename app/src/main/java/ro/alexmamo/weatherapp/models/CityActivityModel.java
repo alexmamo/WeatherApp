@@ -16,16 +16,12 @@ import static ro.alexmamo.weatherapp.Constants.APY_KEY;
 import static ro.alexmamo.weatherapp.Constants.TAG;
 
 public class CityActivityModel implements CityActivityContract.Model {
-    @Override
-    public void getCurrentWeather(City city, CurrentWeatherCallback currentWeatherCallback) {
+    public void getResponse(City city, ResponseCallback callback) {
         OpenWeatherMapApi openWeatherMapApi = RetrofitClient.getInstance().getOpenWeatherMapApi();
-        Callback<CurrentWeather> callback = new Callback<CurrentWeather>() {
+        Callback<CurrentWeather> currentWeatherCallback = new Callback<CurrentWeather>() {
             @Override
             public void onResponse(@NonNull Call<CurrentWeather> call, @NonNull Response<CurrentWeather> response) {
-                CurrentWeather currentWeather = response.body();
-                if (currentWeather != null) {
-                    currentWeatherCallback.onCurrentWeatherCallback(currentWeather);
-                }
+                callback.onCallback(response);
             }
 
             @Override
@@ -34,10 +30,10 @@ public class CityActivityModel implements CityActivityContract.Model {
             }
         };
         Call<CurrentWeather> call = openWeatherMapApi.getCurrentWeather(city.cityName, APY_KEY);
-        call.enqueue(callback);
+        call.enqueue(currentWeatherCallback);
     }
 
-    public interface CurrentWeatherCallback {
-        void onCurrentWeatherCallback(CurrentWeather currentWeather);
+    public interface ResponseCallback {
+        void onCallback(Response<CurrentWeather> response);
     }
 }
