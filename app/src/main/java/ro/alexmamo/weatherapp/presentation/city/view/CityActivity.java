@@ -1,4 +1,4 @@
-package ro.alexmamo.weatherapp.views;
+package ro.alexmamo.weatherapp.presentation.city.view;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -8,9 +8,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ro.alexmamo.weatherapp.R;
-import ro.alexmamo.weatherapp.contracts.CityActivityContract;
-import ro.alexmamo.weatherapp.pojos.City;
-import ro.alexmamo.weatherapp.presenters.CityActivityPresenter;
+import ro.alexmamo.weatherapp.presentation.city.CityActivityContract;
+import ro.alexmamo.weatherapp.presentation.city.pojo.City;
+import ro.alexmamo.weatherapp.presentation.city.presenter.CityActivityPresenter;
 
 public class CityActivity extends AppCompatActivity implements CityActivityContract.View {
     private City city;
