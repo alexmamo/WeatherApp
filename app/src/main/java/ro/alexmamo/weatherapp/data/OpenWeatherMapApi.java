@@ -3,7 +3,7 @@ package ro.alexmamo.weatherapp.data;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import ro.alexmamo.weatherapp.presentation.cities.pojo.CurrentWeather;
+import ro.alexmamo.weatherapp.presentation.cities.model.CurrentWeather;
 
 public interface OpenWeatherMapApi {
     @GET("weather")

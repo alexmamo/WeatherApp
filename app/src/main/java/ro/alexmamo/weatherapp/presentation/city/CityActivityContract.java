@@ -1,7 +1,7 @@
 package ro.alexmamo.weatherapp.presentation.city;
 
 import ro.alexmamo.weatherapp.domain.model.city.CityActivityModel;
-import ro.alexmamo.weatherapp.presentation.city.pojo.City;
+import ro.alexmamo.weatherapp.presentation.city.model.City;
 
 public interface CityActivityContract {
     interface View {

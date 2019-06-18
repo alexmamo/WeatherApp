@@ -8,9 +8,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import ro.alexmamo.weatherapp.data.OpenWeatherMapApi;
 import ro.alexmamo.weatherapp.data.RetrofitClient;
-import ro.alexmamo.weatherapp.presentation.cities.pojo.CurrentWeather;
+import ro.alexmamo.weatherapp.presentation.cities.model.CurrentWeather;
 import ro.alexmamo.weatherapp.presentation.city.CityActivityContract;
-import ro.alexmamo.weatherapp.presentation.city.pojo.City;
+import ro.alexmamo.weatherapp.presentation.city.model.City;
 
 import static android.support.constraint.Constraints.TAG;
 import static ro.alexmamo.weatherapp.utils.Constants.APY_KEY;

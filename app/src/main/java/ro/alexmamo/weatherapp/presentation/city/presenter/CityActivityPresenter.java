@@ -8,9 +8,9 @@ import java.util.Locale;
 
 import okhttp3.ResponseBody;
 import ro.alexmamo.weatherapp.domain.model.city.CityActivityModel;
-import ro.alexmamo.weatherapp.presentation.cities.pojo.CurrentWeather;
+import ro.alexmamo.weatherapp.presentation.cities.model.CurrentWeather;
 import ro.alexmamo.weatherapp.presentation.city.CityActivityContract;
-import ro.alexmamo.weatherapp.presentation.city.pojo.City;
+import ro.alexmamo.weatherapp.presentation.city.model.City;
 
 public class CityActivityPresenter implements CityActivityContract.Presenter {
     private City city;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import ro.alexmamo.weatherapp.domain.model.cities.CitiesActivityModel;
 import ro.alexmamo.weatherapp.presentation.cities.CitiesActivityContract;
-import ro.alexmamo.weatherapp.presentation.city.pojo.City;
+import ro.alexmamo.weatherapp.presentation.city.model.City;
 
 public class CitiesActivityPresenter implements CitiesActivityContract.Presenter {
     private CitiesActivityContract.View view;

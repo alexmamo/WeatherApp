@@ -2,7 +2,7 @@ package ro.alexmamo.weatherapp.presentation.cities;
 
 import java.util.List;
 
-import ro.alexmamo.weatherapp.presentation.city.pojo.City;
+import ro.alexmamo.weatherapp.presentation.city.model.City;
 
 public interface CitiesActivityContract {
     interface View {

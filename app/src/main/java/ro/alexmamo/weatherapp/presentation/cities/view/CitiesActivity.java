@@ -12,7 +12,7 @@ import ro.alexmamo.weatherapp.R;
 
 import ro.alexmamo.weatherapp.presentation.cities.CitiesActivityContract;
 import ro.alexmamo.weatherapp.presentation.cities.presenter.CitiesActivityPresenter;
-import ro.alexmamo.weatherapp.presentation.city.pojo.City;
+import ro.alexmamo.weatherapp.presentation.city.model.City;
 import ro.alexmamo.weatherapp.presentation.city.view.CityActivity;
 
 public class CitiesActivity extends AppCompatActivity implements CitiesActivityContract.View, CitiesAdapter.OnCityClickListener {

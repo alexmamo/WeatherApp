@@ -1,4 +1,4 @@
-package ro.alexmamo.weatherapp.presentation.cities.pojo;
+package ro.alexmamo.weatherapp.presentation.cities.model;
 
 public class CurrentWeather {
     public Weather[] weather;

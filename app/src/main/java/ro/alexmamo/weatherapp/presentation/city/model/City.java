@@ -1,4 +1,4 @@
-package ro.alexmamo.weatherapp.presentation.city.pojo;
+package ro.alexmamo.weatherapp.presentation.city.model;
 
 import java.io.Serializable;
 
