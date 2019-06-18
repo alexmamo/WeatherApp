@@ -16,13 +16,13 @@ import java.util.Locale;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import ro.alexmamo.weatherapp.OpenWeatherMapApi;
-import ro.alexmamo.weatherapp.RetrofitClient;
+import ro.alexmamo.weatherapp.data.OpenWeatherMapApi;
+import ro.alexmamo.weatherapp.data.RetrofitClient;
 import ro.alexmamo.weatherapp.models.City;
 import ro.alexmamo.weatherapp.models.CurrentWeather;
 
-import static ro.alexmamo.weatherapp.Constants.APY_KEY;
-import static ro.alexmamo.weatherapp.Constants.TAG;
+import static ro.alexmamo.weatherapp.utils.Constants.APY_KEY;
+import static ro.alexmamo.weatherapp.utils.Constants.TAG;
 
 public class CurrentWeatherViewModel extends AndroidViewModel {
     private MutableLiveData<CurrentWeather> currentWeatherLiveData;

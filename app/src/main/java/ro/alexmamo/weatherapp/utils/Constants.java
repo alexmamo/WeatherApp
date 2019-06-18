@@ -1,4 +1,4 @@
-package ro.alexmamo.weatherapp;
+package ro.alexmamo.weatherapp.utils;
 
 public interface Constants {
     String TAG = "WeatherAppTag";

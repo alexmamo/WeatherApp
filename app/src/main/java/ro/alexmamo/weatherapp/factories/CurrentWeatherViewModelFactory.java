@@ -1,4 +1,4 @@
-package ro.alexmamo.weatherapp;
+package ro.alexmamo.weatherapp.factories;
 
 import android.app.Application;
 import android.arch.lifecycle.ViewModel;

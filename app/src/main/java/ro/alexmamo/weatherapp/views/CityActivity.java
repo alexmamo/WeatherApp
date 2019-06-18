@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import ro.alexmamo.weatherapp.CurrentWeatherViewModelFactory;
+import ro.alexmamo.weatherapp.factories.CurrentWeatherViewModelFactory;
 import ro.alexmamo.weatherapp.R;
 import ro.alexmamo.weatherapp.models.City;
 import ro.alexmamo.weatherapp.models.CurrentWeather;

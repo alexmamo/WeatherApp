@@ -1,4 +1,4 @@
-package ro.alexmamo.weatherapp;
+package ro.alexmamo.weatherapp.data;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
