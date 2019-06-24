@@ -13,7 +13,6 @@ public class CurrentWeatherViewModelFactory implements ViewModelProvider.Factory
     private Application application;
     private City city;
 
-
     public CurrentWeatherViewModelFactory(Application application, City city) {
         this.application = application;
         this.city = city;

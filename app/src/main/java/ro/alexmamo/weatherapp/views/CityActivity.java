@@ -17,7 +17,7 @@ import ro.alexmamo.weatherapp.viewmodels.CurrentWeatherViewModel;
 public class CityActivity extends AppCompatActivity {
     private TextView dateTextView, timeTextView, temperatureTextView, minTextView, maxTextView, weatherTextView, windTextView, pressureTextView, humidityTextView;
     private City city;
-    private CurrentWeatherViewModel citiesViewModel;
+    private CurrentWeatherViewModel currentWeatherViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +54,9 @@ public class CityActivity extends AppCompatActivity {
     }
 
     public void addCitiesToList() {
-        citiesViewModel = ViewModelProviders.of(this, new CurrentWeatherViewModelFactory(this.getApplication(), city)).get(CurrentWeatherViewModel.class);
-        LiveData<CurrentWeather> currentWeatherLiveData = citiesViewModel.getCurrentWeatherLiveData();
+        CurrentWeatherViewModelFactory factory = new CurrentWeatherViewModelFactory(this.getApplication(), city);
+        currentWeatherViewModel = ViewModelProviders.of(this, factory).get(CurrentWeatherViewModel.class);
+        LiveData<CurrentWeather> currentWeatherLiveData = currentWeatherViewModel.getCurrentWeatherLiveData();
         currentWeatherLiveData.observe(this, currentWeather -> {
             if (currentWeather != null) {
                 setDataToViews(currentWeather);
@@ -64,31 +65,31 @@ public class CityActivity extends AppCompatActivity {
     }
 
     private void setDataToViews(CurrentWeather currentWeather) {
-        String[] dateAndTime = citiesViewModel.getDateAndTime();
+        String[] dateAndTime = currentWeatherViewModel.getDateAndTime();
         String dayOfTheWeekAndCurrentDate = dateAndTime[0];
         setDateTextViews(dayOfTheWeekAndCurrentDate);
         String time = dateAndTime[1];
         setTimeTextViews(time);
 
-        String temp = citiesViewModel.getTemperature(currentWeather);
+        String temp = currentWeatherViewModel.getTemperature(currentWeather);
         setTemperatureTextView(temp);
 
-        String min = citiesViewModel.getMin(currentWeather);
+        String min = currentWeatherViewModel.getMin(currentWeather);
         setMinTextViews(min);
 
-        String max = citiesViewModel.getMax(currentWeather);
+        String max = currentWeatherViewModel.getMax(currentWeather);
         setMaxTextViews(max);
 
-        String weather = citiesViewModel.getWeather(currentWeather);
+        String weather = currentWeatherViewModel.getWeather(currentWeather);
         setWeatherTextView(weather);
 
-        String wind = citiesViewModel.getWind(currentWeather);
+        String wind = currentWeatherViewModel.getWind(currentWeather);
         setWindTextView(wind);
 
-        String pressure = citiesViewModel.getPressure(currentWeather);
+        String pressure = currentWeatherViewModel.getPressure(currentWeather);
         setPressureTextView(pressure);
 
-        String humidity = citiesViewModel.getHumidity(currentWeather);
+        String humidity = currentWeatherViewModel.getHumidity(currentWeather);
         setHumidityTextView(humidity);
     }
 
