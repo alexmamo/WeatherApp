@@ -1,4 +1,4 @@
-package ro.alexmamo.weatherapp.viewmodels;
+package ro.alexmamo.weatherapp.cities;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -7,8 +7,7 @@ import android.arch.lifecycle.MutableLiveData;
 
 import java.util.List;
 
-import ro.alexmamo.weatherapp.data.Cities;
-import ro.alexmamo.weatherapp.models.City;
+import ro.alexmamo.weatherapp.cities.models.City;
 
 public class CitiesViewModel extends AndroidViewModel {
     private MutableLiveData<List<City>> citiesLiveData;
@@ -24,7 +23,7 @@ public class CitiesViewModel extends AndroidViewModel {
         citiesLiveData.setValue(cityList);
     }
 
-    public LiveData<List<City>> getCitiesLiveData() {
+    LiveData<List<City>> getCitiesLiveData() {
         return citiesLiveData;
     }
 }

@@ -1,12 +1,12 @@
-package ro.alexmamo.weatherapp.data;
+package ro.alexmamo.weatherapp.cities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ro.alexmamo.weatherapp.models.City;
+import ro.alexmamo.weatherapp.cities.models.City;
 
-public class Cities {
-    public static List<City> getCityList() {
+class Cities {
+    static List<City> getCityList() {
         List<City> cityList = new ArrayList<>();
         cityList.add(new City("Brasov", "https://www.alexmamo.ro/apps/WeatherApp/CityImages/Brasov.jpg"));
         cityList.add(new City("Bucharest", "https://www.alexmamo.ro/apps/WeatherApp/CityImages/Bucharest.jpg"));

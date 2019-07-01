@@ -1,4 +1,4 @@
-package ro.alexmamo.weatherapp.views;
+package ro.alexmamo.weatherapp.city;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
@@ -8,11 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import ro.alexmamo.weatherapp.factories.CurrentWeatherViewModelFactory;
 import ro.alexmamo.weatherapp.R;
-import ro.alexmamo.weatherapp.models.City;
-import ro.alexmamo.weatherapp.models.CurrentWeather;
-import ro.alexmamo.weatherapp.viewmodels.CurrentWeatherViewModel;
+import ro.alexmamo.weatherapp.cities.models.City;
+import ro.alexmamo.weatherapp.city.models.CurrentWeather;
 
 public class CityActivity extends AppCompatActivity {
     private TextView dateTextView, timeTextView, temperatureTextView, minTextView, maxTextView, weatherTextView, windTextView, pressureTextView, humidityTextView;

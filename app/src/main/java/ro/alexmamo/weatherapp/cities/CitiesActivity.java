@@ -1,4 +1,4 @@
-package ro.alexmamo.weatherapp.views;
+package ro.alexmamo.weatherapp.cities;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ro.alexmamo.weatherapp.R;
-import ro.alexmamo.weatherapp.models.City;
-import ro.alexmamo.weatherapp.viewmodels.CitiesViewModel;
+import ro.alexmamo.weatherapp.cities.models.City;
+import ro.alexmamo.weatherapp.city.CityActivity;
 
-public class CitiesActivity extends AppCompatActivity implements CityAdapter.OnCityClickListener {
+public class CitiesActivity extends AppCompatActivity implements CitiesAdapter.OnCityClickListener {
     private RecyclerView citiesRecyclerView;
     private List<City> cityList = new ArrayList<>();
-    private CityAdapter cityAdapter;
+    private CitiesAdapter citiesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,8 @@ public class CitiesActivity extends AppCompatActivity implements CityAdapter.OnC
     }
 
     public void initCityAdapter() {
-        cityAdapter = new CityAdapter(this, cityList, this);
-        citiesRecyclerView.setAdapter(cityAdapter);
+        citiesAdapter = new CitiesAdapter(this, cityList, this);
+        citiesRecyclerView.setAdapter(citiesAdapter);
     }
 
     public void addCitiesToList() {
@@ -43,7 +43,7 @@ public class CitiesActivity extends AppCompatActivity implements CityAdapter.OnC
         cityLiveData.observe(this, cities -> {
             if (cities != null) {
                 cityList.addAll(cities);
-                cityAdapter.notifyDataSetChanged();
+                citiesAdapter.notifyDataSetChanged();
             }
         });
     }

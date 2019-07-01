@@ -1,4 +1,4 @@
-package ro.alexmamo.weatherapp.viewmodels;
+package ro.alexmamo.weatherapp.city;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -16,18 +16,18 @@ import java.util.Locale;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ro.alexmamo.weatherapp.city.models.CurrentWeather;
 import ro.alexmamo.weatherapp.data.OpenWeatherMapApi;
 import ro.alexmamo.weatherapp.data.RetrofitClient;
-import ro.alexmamo.weatherapp.models.City;
-import ro.alexmamo.weatherapp.models.CurrentWeather;
+import ro.alexmamo.weatherapp.cities.models.City;
 
 import static ro.alexmamo.weatherapp.utils.Constants.APY_KEY;
 import static ro.alexmamo.weatherapp.utils.Constants.TAG;
 
-public class CurrentWeatherViewModel extends AndroidViewModel {
+class CurrentWeatherViewModel extends AndroidViewModel {
     private MutableLiveData<CurrentWeather> currentWeatherLiveData;
 
-    public CurrentWeatherViewModel(Application application, City city) {
+    CurrentWeatherViewModel(Application application, City city) {
         super(application);
         currentWeatherLiveData = new MutableLiveData<>();
         addCurrentWeatherToLiveData(city);
@@ -53,11 +53,11 @@ public class CurrentWeatherViewModel extends AndroidViewModel {
         call.enqueue(callback);
     }
 
-    public LiveData<CurrentWeather> getCurrentWeatherLiveData() {
+    LiveData<CurrentWeather> getCurrentWeatherLiveData() {
         return currentWeatherLiveData;
     }
 
-    public String[] getDateAndTime() {
+    String[] getDateAndTime() {
         Date date = Calendar.getInstance().getTime();
         String dayOfTheWeek = new SimpleDateFormat("E", Locale.US).format(date);
         String currentDate = new SimpleDateFormat("MMM dd, yyyy", Locale.US).format(date);
@@ -69,31 +69,31 @@ public class CurrentWeatherViewModel extends AndroidViewModel {
         return new String[]{dayOfTheWeekAndCurrentDate, time};
     }
 
-    public String getTemperature(CurrentWeather currentWeather) {
+    String getTemperature(CurrentWeather currentWeather) {
         return getCelsiusTemperature(currentWeather.main.temp) + "°C";
     }
 
-    public String getMin(CurrentWeather currentWeather) {
+    String getMin(CurrentWeather currentWeather) {
         return "Min: " + getCelsiusTemperature(currentWeather.main.temp_min) + "°C";
     }
 
-    public String getMax(CurrentWeather currentWeather) {
+    String getMax(CurrentWeather currentWeather) {
         return  "Max: " + getCelsiusTemperature(currentWeather.main.temp_max) + "°C";
     }
 
-    public String getWeather(CurrentWeather currentWeather) {
+    String getWeather(CurrentWeather currentWeather) {
         return currentWeather.weather[0].main + ", " + currentWeather.weather[0].description;
     }
 
-    public String getWind(CurrentWeather currentWeather) {
+    String getWind(CurrentWeather currentWeather) {
         return "Wind: " + currentWeather.wind.speed + " Km/h";
     }
 
-    public String getPressure(CurrentWeather currentWeather) {
+    String getPressure(CurrentWeather currentWeather) {
         return "Pressure: " + currentWeather.main.pressure;
     }
 
-    public String getHumidity(CurrentWeather currentWeather) {
+    String getHumidity(CurrentWeather currentWeather) {
         return "Humidity: " + currentWeather.main.humidity + "%";
     }
 
