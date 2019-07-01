@@ -31,6 +31,7 @@ dependencies {
     androidTestImplementation deps.support.test.runner
     androidTestImplementation deps.support.test.espresso
     testImplementation deps.unitTest.junit
+    testImplementation deps.mockitoTest.mockito
     implementation deps.retrofit2.adapterRxJava2
     implementation deps.retrofit2.converterGson
     implementation deps.images.glide

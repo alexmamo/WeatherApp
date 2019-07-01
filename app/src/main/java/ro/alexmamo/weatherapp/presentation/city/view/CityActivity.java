@@ -8,13 +8,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ro.alexmamo.weatherapp.R;
-import ro.alexmamo.weatherapp.presentation.city.CityActivityContract;
+import ro.alexmamo.weatherapp.domain.model.city.CityModel;
+import ro.alexmamo.weatherapp.presentation.city.CityContract;
 import ro.alexmamo.weatherapp.presentation.city.model.City;
-import ro.alexmamo.weatherapp.presentation.city.presenter.CityActivityPresenter;
+import ro.alexmamo.weatherapp.presentation.city.presenter.CityPresenter;
 
-public class CityActivity extends AppCompatActivity implements CityActivityContract.View {
+public class CityActivity extends AppCompatActivity implements CityContract.View {
     private City city;
-    private CityActivityPresenter presenter;
+    private CityPresenter presenter;
     private TextView dateTextView, timeTextView, temperatureTextView, minTextView, maxTextView, weatherTextView, windTextView, pressureTextView, humidityTextView;
 
     @Override
@@ -24,7 +25,7 @@ public class CityActivity extends AppCompatActivity implements CityActivityContr
         enableHomeButton();
         city = getCityFromIntent();
         setTitle(city.cityName);
-        initCityActivityPresenter();
+        initCityPresenter();
     }
 
     private void enableHomeButton() {
@@ -38,10 +39,10 @@ public class CityActivity extends AppCompatActivity implements CityActivityContr
         return (City) getIntent().getSerializableExtra("city");
     }
 
-    private void initCityActivityPresenter() {
-        presenter = new CityActivityPresenter(city);
+    private void initCityPresenter() {
+        CityModel cityModel = new CityModel(city);
+        presenter = new CityPresenter(cityModel);
         presenter.attachView(this);
-        presenter.setWeatherDataToViews();
     }
 
     @Override
@@ -59,53 +60,39 @@ public class CityActivity extends AppCompatActivity implements CityActivityContr
 
     @Override
     public void setDateAndTimeTextViews(String dayOfTheWeekAndCurrentDate, String time) {
-        if (presenter.isViewAttached()) {
-            dateTextView.setText(dayOfTheWeekAndCurrentDate);
-            timeTextView.setText(time);
-        }
+        dateTextView.setText(dayOfTheWeekAndCurrentDate);
+        timeTextView.setText(time);
     }
 
     @Override
     public void setTemperatureTextView(String temp) {
-        if (presenter.isViewAttached()) {
-            temperatureTextView.setText(temp);
-        }
+        temperatureTextView.setText(temp);
     }
 
     @Override
     public void setMinAndMaxTextViews(String min, String max) {
-        if (presenter.isViewAttached()) {
-            minTextView.setText(min);
-            maxTextView.setText(max);
-        }
+        minTextView.setText(min);
+        maxTextView.setText(max);
     }
 
     @Override
     public void setWeatherTextView(String weather) {
-        if (presenter.isViewAttached()) {
-            weatherTextView.setText(weather);
-        }
+        weatherTextView.setText(weather);
     }
 
     @Override
     public void setWindTextView(String wind) {
-        if (presenter.isViewAttached()) {
-            windTextView.setText(wind);
-        }
+        windTextView.setText(wind);
     }
 
     @Override
     public void setPressureTextView(String pressure) {
-        if (presenter.isViewAttached()) {
-            pressureTextView.setText(pressure);
-        }
+        pressureTextView.setText(pressure);
     }
 
     @Override
     public void setHumidityTextView(String humidity) {
-        if (presenter.isViewAttached()) {
-            humidityTextView.setText(humidity);
-        }
+        humidityTextView.setText(humidity);
     }
 
     @Override

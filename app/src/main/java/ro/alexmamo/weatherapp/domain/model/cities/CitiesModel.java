@@ -3,10 +3,10 @@ package ro.alexmamo.weatherapp.domain.model.cities;
 import java.util.ArrayList;
 import java.util.List;
 
-import ro.alexmamo.weatherapp.presentation.cities.CitiesActivityContract;
+import ro.alexmamo.weatherapp.presentation.cities.CitiesContract;
 import ro.alexmamo.weatherapp.presentation.city.model.City;
 
-public class CitiesActivityModel implements CitiesActivityContract.Model {
+public class CitiesModel implements CitiesContract.Model {
     @Override
     public List<City> getCityList() {
         List<City> cityList = new ArrayList<>();

@@ -4,7 +4,7 @@ import java.util.List;
 
 import ro.alexmamo.weatherapp.presentation.city.model.City;
 
-public interface CitiesActivityContract {
+public interface CitiesContract {
     interface View {
         void initCitiesRecyclerView();
         void initCityAdapter();
@@ -12,7 +12,7 @@ public interface CitiesActivityContract {
     }
 
     interface Presenter {
-        void getCityList();
+        void passCityListFromModelToView();
     }
 
     interface Model {

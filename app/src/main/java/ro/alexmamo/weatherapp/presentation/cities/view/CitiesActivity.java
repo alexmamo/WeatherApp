@@ -10,12 +10,13 @@ import java.util.List;
 
 import ro.alexmamo.weatherapp.R;
 
-import ro.alexmamo.weatherapp.presentation.cities.CitiesActivityContract;
-import ro.alexmamo.weatherapp.presentation.cities.presenter.CitiesActivityPresenter;
+import ro.alexmamo.weatherapp.domain.model.cities.CitiesModel;
+import ro.alexmamo.weatherapp.presentation.cities.CitiesContract;
+import ro.alexmamo.weatherapp.presentation.cities.presenter.CitiesPresenter;
 import ro.alexmamo.weatherapp.presentation.city.model.City;
 import ro.alexmamo.weatherapp.presentation.city.view.CityActivity;
 
-public class CitiesActivity extends AppCompatActivity implements CitiesActivityContract.View, CitiesAdapter.OnCityClickListener {
+public class CitiesActivity extends AppCompatActivity implements CitiesContract.View, CitiesAdapter.OnCityClickListener {
     private List<City> cityList = new ArrayList<>();
     private CitiesAdapter citiesAdapter;
     private RecyclerView citiesRecyclerView;
@@ -24,12 +25,13 @@ public class CitiesActivity extends AppCompatActivity implements CitiesActivityC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cities);
-        initCitiesActivityPresenter();
+        initCitiesPresenter();
     }
 
-    private void initCitiesActivityPresenter() {
-        CitiesActivityPresenter presenter = new CitiesActivityPresenter(this);
-        presenter.getCityList();
+    public void initCitiesPresenter() {
+        CitiesModel citiesModel = new CitiesModel();
+        CitiesPresenter presenter = new CitiesPresenter(this, citiesModel);
+        presenter.passCityListFromModelToView();
     }
 
     @Override

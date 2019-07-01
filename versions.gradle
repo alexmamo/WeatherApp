@@ -15,6 +15,7 @@ def versions = [:]
     versions.test = "1.0.2"
     versions.espresso = "3.0.2"
     versions.junit = "4.12"
+    versions.mockito = "1.10.19"
     versions.retrofit2 = "2.5.0"
     versions.glide = "4.9.0"
 
@@ -35,6 +36,10 @@ deps.support = support
 def unitTest = [:]
     unitTest.junit = "junit:junit:$versions.junit"
 deps.unitTest = unitTest
+
+def mockitoTest = [:]
+    mockitoTest.mockito = "org.mockito:mockito-core:$versions.mockito"
+deps.mockitoTest = mockitoTest
 
 def retrofit2 = [:]
     retrofit2.adapterRxJava2 = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit2"
