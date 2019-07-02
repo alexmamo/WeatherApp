@@ -12,7 +12,7 @@ import ro.alexmamo.weatherapp.presentation.city.CityContract;
 
 public class CityPresenter implements CityContract.Presenter, CityModel.CurrentWeatherCallback {
     private CityModel cityModel;
-    private CityContract.View view;
+    public CityContract.View view;
     private CurrentWeather currentWeather;
 
     public CityPresenter(CityModel cityModel) {
