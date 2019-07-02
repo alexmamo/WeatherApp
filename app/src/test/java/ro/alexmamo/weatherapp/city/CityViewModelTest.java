@@ -20,6 +20,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class CityViewModelTest {
     private MutableLiveData<CurrentWeather> mockLiveData = new MutableLiveData<>();
+    private CurrentWeather currentWeather;
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
     @Mock
@@ -27,9 +28,10 @@ public class CityViewModelTest {
 
     @Before
     public void setUp() {
-        CurrentWeather currentWeather = new CurrentWeather();
+        currentWeather = new CurrentWeather();
         currentWeather.weather = new Weather[]{new Weather()};
         currentWeather.main = new Main();
+        currentWeather.main.temp = 23.3;
         currentWeather.wind = new Wind();
         mockLiveData.setValue(currentWeather);
     }
@@ -37,5 +39,14 @@ public class CityViewModelTest {
     @Test
     public void currentWeatherLiveDataValidatorIfMockData() {
         when(currentWeatherViewModel.getCurrentWeatherLiveData()).thenReturn(mockLiveData);
+        CurrentWeather currentWeather = mockLiveData.getValue();
+        if(currentWeather != null) {
+            System.out.println(mockLiveData.getValue().main.temp);
+        }
+    }
+
+    @Test
+    public void celsiusTemperatureValidator() {
+        when(currentWeatherViewModel.getTemperature(currentWeather)).thenReturn(23.3 + "°C");
     }
 }
