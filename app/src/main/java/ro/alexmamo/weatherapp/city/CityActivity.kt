@@ -19,7 +19,7 @@ class CityActivity : AppCompatActivity() {
         setContentView(R.layout.activity_city)
         enableHomeButton()
         setActivityTitle()
-        addCitiesToList()
+        getCurrentWeather()
     }
 
     private fun enableHomeButton() {
@@ -31,7 +31,7 @@ class CityActivity : AppCompatActivity() {
         title = cityFromIntent.cityName
     }
 
-    private fun addCitiesToList() {
+    private fun getCurrentWeather() {
         val factory = CurrentWeatherViewModelFactory(this.application, cityFromIntent)
         currentWeatherViewModel = ViewModelProviders.of(this, factory).get(CurrentWeatherViewModel::class.java)
         val currentWeatherLiveData = currentWeatherViewModel!!.currentWeatherLiveData
