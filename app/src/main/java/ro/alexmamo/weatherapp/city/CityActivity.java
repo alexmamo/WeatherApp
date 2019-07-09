@@ -63,31 +63,31 @@ public class CityActivity extends AppCompatActivity {
     }
 
     private void setDataToViews(CurrentWeather currentWeather) {
-        String[] dateAndTime = currentWeatherViewModel.getDateAndTime();
+        String[] dateAndTime = currentWeatherViewModel.currentWeatherRepository.getDateAndTime();
         String dayOfTheWeekAndCurrentDate = dateAndTime[0];
         setDateTextViews(dayOfTheWeekAndCurrentDate);
         String time = dateAndTime[1];
         setTimeTextViews(time);
 
-        String temp = currentWeatherViewModel.getTemperature(currentWeather);
+        String temp = currentWeatherViewModel.currentWeatherRepository.getTemperature(currentWeather);
         setTemperatureTextView(temp);
 
-        String min = currentWeatherViewModel.getMin(currentWeather);
+        String min = currentWeatherViewModel.currentWeatherRepository.getMin(currentWeather);
         setMinTextViews(min);
 
-        String max = currentWeatherViewModel.getMax(currentWeather);
+        String max = currentWeatherViewModel.currentWeatherRepository.getMax(currentWeather);
         setMaxTextViews(max);
 
-        String weather = currentWeatherViewModel.getWeather(currentWeather);
+        String weather = currentWeatherViewModel.currentWeatherRepository.getWeather(currentWeather);
         setWeatherTextView(weather);
 
-        String wind = currentWeatherViewModel.getWind(currentWeather);
+        String wind = currentWeatherViewModel.currentWeatherRepository.getWind(currentWeather);
         setWindTextView(wind);
 
-        String pressure = currentWeatherViewModel.getPressure(currentWeather);
+        String pressure = currentWeatherViewModel.currentWeatherRepository.getPressure(currentWeather);
         setPressureTextView(pressure);
 
-        String humidity = currentWeatherViewModel.getHumidity(currentWeather);
+        String humidity = currentWeatherViewModel.currentWeatherRepository.getHumidity(currentWeather);
         setHumidityTextView(humidity);
     }
 

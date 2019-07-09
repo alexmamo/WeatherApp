@@ -15,6 +15,7 @@ import java.util.List;
 
 import ro.alexmamo.weatherapp.cities.models.City;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -36,5 +37,12 @@ public class CitiesViewModelTest {
     @Test
     public void cityListLiveDataValidatorIfMockData() {
         when(citiesViewModel.getCitiesLiveData()).thenReturn(mockLiveData);
+        List<City> cities = mockLiveData.getValue();
+        if (cities != null) {
+            City firstCity = cities.get(0);
+            String firstCityName = firstCity.cityName;
+            System.out.println(firstCityName);
+        }
+        assertEquals(citiesViewModel.getCitiesLiveData(), mockLiveData);
     }
 }
