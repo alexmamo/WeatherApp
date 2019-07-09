@@ -13,11 +13,11 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <TextView android:id="@+id/date_text_view"
+        <TextView android:id="@+id/dateTextView"
             style="@style/DetailTextViewStyle"
             android:textSize="12sp"/>
 
-        <TextView android:id="@+id/time_text_view"
+        <TextView android:id="@+id/timeTextView"
             style="@style/DetailTextViewStyle"
             android:textSize="30sp"/>
     </LinearLayout>
@@ -25,19 +25,19 @@
     <RelativeLayout android:id="@+id/center_relative_layout"
         style="@style/LeftCenterRightLayoutStyle">
 
-        <TextView android:id="@+id/temperature_text_view"
+        <TextView android:id="@+id/temperatureTextView"
             style="@style/DetailTextViewStyle"
             android:textSize="45sp"
             android:layout_centerInParent="true"/>
 
-        <TextView android:id="@+id/min_text_view"
+        <TextView android:id="@+id/minTextView"
             style="@style/DetailTextViewStyle"
-            android:layout_below="@+id/temperature_text_view"
+            android:layout_below="@+id/temperatureTextView"
             android:layout_centerHorizontal="true"/>
 
-        <TextView android:id="@+id/max_text_view"
+        <TextView android:id="@+id/maxTextView"
             style="@style/DetailTextViewStyle"
-            android:layout_below="@+id/min_text_view"
+            android:layout_below="@+id/minTextView"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
@@ -52,16 +52,16 @@
             android:background="@drawable/ic_wb_sunny_white_24dp"
             tools:ignore="ContentDescription" />
 
-        <TextView android:id="@+id/weather_text_view"
+        <TextView android:id="@+id/weatherTextView"
             style="@style/DetailTextViewStyle"/>
 
-        <TextView android:id="@+id/wind_text_view"
+        <TextView android:id="@+id/windTextView"
             style="@style/DetailTextViewStyle"/>
 
-        <TextView android:id="@+id/pressure_text_view"
+        <TextView android:id="@+id/pressureTextView"
             style="@style/DetailTextViewStyle"/>
 
-        <TextView android:id="@+id/humidity_text_view"
+        <TextView android:id="@+id/humidityTextView"
             style="@style/DetailTextViewStyle"/>
     </LinearLayout>
 </LinearLayout>

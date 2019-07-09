@@ -40,7 +40,7 @@ public class CitiesViewModelTest {
         List<City> cities = mockLiveData.getValue();
         if (cities != null) {
             City firstCity = cities.get(0);
-            String firstCityName = firstCity.cityName;
+            String firstCityName = firstCity.getCityName();
             System.out.println(firstCityName);
         }
         assertEquals(citiesViewModel.getCitiesLiveData(), mockLiveData);

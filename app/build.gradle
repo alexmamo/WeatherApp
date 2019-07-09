@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion buildVersions.targetSdkVersion
@@ -38,4 +40,8 @@ dependencies {
     implementation deps.images.glide
     implementation deps.lifecycle.arch
     annotationProcessor deps.lifecycle.arch
+    implementation deps.lang.kotlin
+}
+repositories {
+    mavenCentral()
 }
