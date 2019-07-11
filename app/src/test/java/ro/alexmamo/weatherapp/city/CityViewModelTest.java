@@ -25,6 +25,8 @@ public class CityViewModelTest {
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
     @Mock
     private CurrentWeatherViewModel currentWeatherViewModel;
+    @Mock
+    private CurrentWeatherRepository currentWeatherRepository;
 
     @Before
     public void setUp() {
@@ -47,6 +49,6 @@ public class CityViewModelTest {
 
     @Test
     public void celsiusTemperatureValidator() {
-        when(currentWeatherViewModel.getTemperature(currentWeather)).thenReturn(23.3 + "°C");
+        when(currentWeatherRepository.getTemperature(currentWeather)).thenReturn(23.3 + "°C");
     }
 }

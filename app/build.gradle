@@ -29,7 +29,9 @@ dependencies {
     implementation deps.support.constraintLayout
     implementation deps.support.design
     androidTestImplementation deps.support.test.runner
+    androidTestImplementation deps.support.test.rules
     androidTestImplementation deps.support.test.espresso
+    androidTestImplementation (deps.support.test.contrib) { exclude group: 'com.android.support', module: 'support-v4' }
     testImplementation deps.unitTest.junit
     testImplementation deps.mockitoTest.mockito
     testImplementation deps.archTest.coreTest
