@@ -3,8 +3,9 @@ package ro.alexmamo.weatherapp.data;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static ro.alexmamo.weatherapp.utils.Constants.BASE_URL;
+
 public class RetrofitClient {
-    private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/";
     private static RetrofitClient retrofitClient;
     private Retrofit retrofit;
 
