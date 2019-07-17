@@ -28,7 +28,7 @@ class AppModule {
     }
 
     @Provides
-    static CurrentWeatherRepository provideCurrentWeatherRepository(OpenWeatherMapApi openWeatherMapApi) {
-        return new CurrentWeatherRepository(openWeatherMapApi);
+    static CurrentWeatherRepository provideCurrentWeatherRepository(OpenWeatherMapApi api) {
+        return new CurrentWeatherRepository(api);
     }
 }

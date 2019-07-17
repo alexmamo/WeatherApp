@@ -32,7 +32,7 @@ public class CurrentWeatherRepository {
         MutableLiveData<CurrentWeather> currentWeatherMutableLiveData = new MutableLiveData<>();
         Callback<CurrentWeather> callback = new Callback<CurrentWeather>() {
             @Override
-            public void onResponse(@NonNull Call<CurrentWeather> call, @NonNull Response<CurrentWeather> response) {
+            public void onResponse(@NonNull Call<CurrentWeather> call, Response<CurrentWeather> response) {
                 CurrentWeather currentWeather = response.body();
                 if (currentWeather != null) {
                     currentWeatherMutableLiveData.setValue(currentWeather);

@@ -10,9 +10,9 @@ import ro.alexmamo.weatherapp.city.models.CurrentWeather;
 class CurrentWeatherViewModel extends AndroidViewModel {
     private LiveData<CurrentWeather> currentWeatherLiveData;
 
-    CurrentWeatherViewModel(Application application, City city, CurrentWeatherRepository currentWeatherRepository) {
+    CurrentWeatherViewModel(Application application, City city, CurrentWeatherRepository repository) {
         super(application);
-        currentWeatherLiveData = currentWeatherRepository.addCurrentWeatherToLiveData(city);
+        currentWeatherLiveData = repository.addCurrentWeatherToLiveData(city);
     }
 
     LiveData<CurrentWeather> getCurrentWeatherLiveData() {

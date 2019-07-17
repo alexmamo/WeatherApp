@@ -11,17 +11,20 @@ import ro.alexmamo.weatherapp.cities.models.City;
 public class CurrentWeatherViewModelFactory implements ViewModelProvider.Factory {
     private Application application;
     private City city;
-    private CurrentWeatherRepository currentWeatherRepository;
+    private CurrentWeatherRepository repository;
 
-    CurrentWeatherViewModelFactory(Application application, City city, CurrentWeatherRepository currentWeatherRepository) {
+    CurrentWeatherViewModelFactory(
+            Application application,
+            City city,
+            CurrentWeatherRepository repository) {
         this.application = application;
         this.city = city;
-        this.currentWeatherRepository = currentWeatherRepository;
+        this.repository = repository;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new CurrentWeatherViewModel(application, city, currentWeatherRepository);
+        return (T) new CurrentWeatherViewModel(application, city, repository);
     }
 }
