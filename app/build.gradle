@@ -40,4 +40,9 @@ dependencies {
     implementation deps.images.glide
     implementation deps.lifecycle.arch
     annotationProcessor deps.lifecycle.arch
+    implementation deps.dagger2.dagger
+    annotationProcessor deps.dagger2.compiler
+    implementation deps.dagger2.android
+    implementation deps.dagger2.support
+    annotationProcessor deps.dagger2.processor
 }

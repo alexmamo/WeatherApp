@@ -21,6 +21,7 @@ def versions = [:]
     versions.retrofit2 = "2.5.0"
     versions.glide = "4.9.0"
     versions.arch = "1.1.1"
+    versions.dagger2 = "2.22"
 
 def deps = [:]
     deps.gradle = "com.android.tools.build:gradle:$versions.gradle"
@@ -60,5 +61,13 @@ def images = [:]
 deps.images = images
 
 def lifecycle = [:]
-    lifecycle.arch = "android.arch.lifecycle:extensions:1.1.1"
+    lifecycle.arch = "android.arch.lifecycle:extensions:$versions.arch"
 deps.lifecycle = lifecycle
+
+def dagger2 = [:]
+    dagger2.dagger = "com.google.dagger:dagger:$versions.dagger2"
+    dagger2.compiler = "com.google.dagger:dagger-compiler:$versions.dagger2"
+    dagger2.android = "com.google.dagger:dagger-android:$versions.dagger2"
+    dagger2.support = "com.google.dagger:dagger-android-support:$versions.dagger2"
+    dagger2.processor = "com.google.dagger:dagger-android-processor:$versions.dagger2"
+deps.dagger2 = dagger2

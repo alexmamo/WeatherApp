@@ -17,15 +17,19 @@ import retrofit2.Response;
 import ro.alexmamo.weatherapp.cities.models.City;
 import ro.alexmamo.weatherapp.city.models.CurrentWeather;
 import ro.alexmamo.weatherapp.data.OpenWeatherMapApi;
-import ro.alexmamo.weatherapp.data.RetrofitClient;
 
 import static ro.alexmamo.weatherapp.utils.Constants.APY_KEY;
 import static ro.alexmamo.weatherapp.utils.Constants.TAG;
 
-class CurrentWeatherRepository {
+public class CurrentWeatherRepository {
+    private OpenWeatherMapApi openWeatherMapApi;
+
+    public CurrentWeatherRepository(OpenWeatherMapApi openWeatherMapApi) {
+        this.openWeatherMapApi = openWeatherMapApi;
+    }
+
     LiveData<CurrentWeather> addCurrentWeatherToLiveData(City city) {
         MutableLiveData<CurrentWeather> currentWeatherMutableLiveData = new MutableLiveData<>();
-        OpenWeatherMapApi openWeatherMapApi = RetrofitClient.getInstance().getOpenWeatherMapApi();
         Callback<CurrentWeather> callback = new Callback<CurrentWeather>() {
             @Override
             public void onResponse(@NonNull Call<CurrentWeather> call, @NonNull Response<CurrentWeather> response) {

@@ -4,18 +4,23 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
+import dagger.Module;
+import dagger.android.support.DaggerAppCompatActivity;
 import ro.alexmamo.weatherapp.R;
 import ro.alexmamo.weatherapp.cities.models.City;
 import ro.alexmamo.weatherapp.city.models.CurrentWeather;
 
-public class CityActivity extends AppCompatActivity {
+@Module
+public class CityActivity extends DaggerAppCompatActivity {
     private TextView dateTextView, timeTextView, temperatureTextView, minTextView, maxTextView, weatherTextView, windTextView, pressureTextView, humidityTextView;
     private City city;
-    private CurrentWeatherViewModel currentWeatherViewModel;
+    @Inject
+    CurrentWeatherRepository currentWeatherRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +57,8 @@ public class CityActivity extends AppCompatActivity {
     }
 
     public void addCitiesToList() {
-        CurrentWeatherViewModelFactory factory = new CurrentWeatherViewModelFactory(this.getApplication(), city);
-        currentWeatherViewModel = ViewModelProviders.of(this, factory).get(CurrentWeatherViewModel.class);
+        CurrentWeatherViewModelFactory currentWeatherViewModelFactory = new CurrentWeatherViewModelFactory(getApplication(), city, currentWeatherRepository);
+        CurrentWeatherViewModel currentWeatherViewModel = ViewModelProviders.of(this, currentWeatherViewModelFactory).get(CurrentWeatherViewModel.class);
         LiveData<CurrentWeather> currentWeatherLiveData = currentWeatherViewModel.getCurrentWeatherLiveData();
         currentWeatherLiveData.observe(this, currentWeather -> {
             if (currentWeather != null) {
@@ -63,31 +68,31 @@ public class CityActivity extends AppCompatActivity {
     }
 
     private void setDataToViews(CurrentWeather currentWeather) {
-        String[] dateAndTime = currentWeatherViewModel.currentWeatherRepository.getDateAndTime();
+        String[] dateAndTime = currentWeatherRepository.getDateAndTime();
         String dayOfTheWeekAndCurrentDate = dateAndTime[0];
         setDateTextViews(dayOfTheWeekAndCurrentDate);
         String time = dateAndTime[1];
         setTimeTextViews(time);
 
-        String temp = currentWeatherViewModel.currentWeatherRepository.getTemperature(currentWeather);
+        String temp = currentWeatherRepository.getTemperature(currentWeather);
         setTemperatureTextView(temp);
 
-        String min = currentWeatherViewModel.currentWeatherRepository.getMin(currentWeather);
+        String min = currentWeatherRepository.getMin(currentWeather);
         setMinTextViews(min);
 
-        String max = currentWeatherViewModel.currentWeatherRepository.getMax(currentWeather);
+        String max = currentWeatherRepository.getMax(currentWeather);
         setMaxTextViews(max);
 
-        String weather = currentWeatherViewModel.currentWeatherRepository.getWeather(currentWeather);
+        String weather = currentWeatherRepository.getWeather(currentWeather);
         setWeatherTextView(weather);
 
-        String wind = currentWeatherViewModel.currentWeatherRepository.getWind(currentWeather);
+        String wind = currentWeatherRepository.getWind(currentWeather);
         setWindTextView(wind);
 
-        String pressure = currentWeatherViewModel.currentWeatherRepository.getPressure(currentWeather);
+        String pressure = currentWeatherRepository.getPressure(currentWeather);
         setPressureTextView(pressure);
 
-        String humidity = currentWeatherViewModel.currentWeatherRepository.getHumidity(currentWeather);
+        String humidity = currentWeatherRepository.getHumidity(currentWeather);
         setHumidityTextView(humidity);
     }
 
