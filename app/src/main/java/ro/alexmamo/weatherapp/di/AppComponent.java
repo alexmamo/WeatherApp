@@ -15,7 +15,8 @@ import ro.alexmamo.weatherapp.BaseApplication;
         modules = {
                 AndroidSupportInjectionModule.class,
                 AppModule.class,
-                ActivityBuilderModule.class
+                ActivityBuilderModule.class,
+                CurrentWeatherViewModelModule.class
         }
 )
 public interface AppComponent extends AndroidInjector<BaseApplication> {

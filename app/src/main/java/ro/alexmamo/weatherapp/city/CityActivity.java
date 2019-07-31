@@ -1,8 +1,10 @@
 package ro.alexmamo.weatherapp.city;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -16,12 +18,12 @@ import ro.alexmamo.weatherapp.cities.models.City;
 import ro.alexmamo.weatherapp.city.models.CurrentWeather;
 
 @Module
-public class CityActivity extends DaggerAppCompatActivity {
+public class CityActivity extends DaggerAppCompatActivity implements Observer<CurrentWeather> {
+    @Inject CurrentWeatherViewModelFactory factory;
     private TextView dateTextView, timeTextView, temperatureTextView, minTextView, maxTextView,
             weatherTextView, windTextView, pressureTextView, humidityTextView;
     private City city;
-    @Inject
-    CurrentWeatherRepository repository;
+    private CurrentWeatherViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,21 +60,22 @@ public class CityActivity extends DaggerAppCompatActivity {
     }
 
     public void addCitiesToList() {
-        CurrentWeatherViewModelFactory factory = new CurrentWeatherViewModelFactory(
-                getApplication(),
-                city,
-                repository);
-        CurrentWeatherViewModel viewModel = ViewModelProviders.of(this, factory)
-                .get(CurrentWeatherViewModel.class);
+        viewModel = ViewModelProviders.of(this, factory).get(CurrentWeatherViewModel.class);
+        viewModel.setCity(city);
         LiveData<CurrentWeather> currentWeatherLiveData = viewModel.getCurrentWeatherLiveData();
-        currentWeatherLiveData.observe(this, currentWeather -> {
-            if (currentWeather != null) {
-                setDataToViews(currentWeather);
-            }
-        });
+        currentWeatherLiveData.observe(this, this);
+    }
+
+    @Override
+    public void onChanged(@Nullable CurrentWeather currentWeather) {
+        if (currentWeather != null) {
+            setDataToViews(currentWeather);
+        }
     }
 
     private void setDataToViews(CurrentWeather currentWeather) {
+        CurrentWeatherRepository repository = viewModel.getRepository();
+
         String[] dateAndTime = repository.getDateAndTime();
         String dayOfTheWeekAndCurrentDate = dateAndTime[0];
         setDateTextViews(dayOfTheWeekAndCurrentDate);

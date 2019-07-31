@@ -6,10 +6,6 @@ import ro.alexmamo.weatherapp.city.CityActivity;
 
 @Module
 abstract class ActivityBuilderModule {
-    @ContributesAndroidInjector(
-            modules = {
-                    CityActivity.class
-            }
-    )
+    @ContributesAndroidInjector
     abstract CityActivity contributeCityActivity();
 }

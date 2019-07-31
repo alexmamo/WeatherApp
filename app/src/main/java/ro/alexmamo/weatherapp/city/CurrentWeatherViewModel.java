@@ -1,21 +1,31 @@
 package ro.alexmamo.weatherapp.city;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModel;
+
+import javax.inject.Inject;
 
 import ro.alexmamo.weatherapp.cities.models.City;
 import ro.alexmamo.weatherapp.city.models.CurrentWeather;
 
-class CurrentWeatherViewModel extends AndroidViewModel {
+public class CurrentWeatherViewModel extends ViewModel {
     private LiveData<CurrentWeather> currentWeatherLiveData;
+    private CurrentWeatherRepository repository;
 
-    CurrentWeatherViewModel(Application application, City city, CurrentWeatherRepository repository) {
-        super(application);
-        currentWeatherLiveData = repository.addCurrentWeatherToLiveData(city);
+    @Inject
+    CurrentWeatherViewModel(CurrentWeatherRepository repository) {
+        this.repository = repository;
     }
 
     LiveData<CurrentWeather> getCurrentWeatherLiveData() {
         return currentWeatherLiveData;
+    }
+
+    CurrentWeatherRepository getRepository() {
+        return repository;
+    }
+
+    public void setCity(City city) {
+        currentWeatherLiveData = repository.addCurrentWeatherToLiveData(city);
     }
 }

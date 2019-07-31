@@ -6,7 +6,6 @@ import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ro.alexmamo.weatherapp.city.CurrentWeatherRepository;
 import ro.alexmamo.weatherapp.data.OpenWeatherMapApi;
 
 import static ro.alexmamo.weatherapp.utils.Constants.BASE_URL;
@@ -25,10 +24,5 @@ class AppModule {
     @Provides
     static OpenWeatherMapApi provideOpenWeatherMapApi(Retrofit retrofit){
         return retrofit.create(OpenWeatherMapApi.class);
-    }
-
-    @Provides
-    static CurrentWeatherRepository provideCurrentWeatherRepository(OpenWeatherMapApi api) {
-        return new CurrentWeatherRepository(api);
     }
 }

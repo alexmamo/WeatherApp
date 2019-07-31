@@ -11,6 +11,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,10 +24,12 @@ import ro.alexmamo.weatherapp.data.OpenWeatherMapApi;
 import static ro.alexmamo.weatherapp.utils.Constants.APY_KEY;
 import static ro.alexmamo.weatherapp.utils.Constants.TAG;
 
+@Singleton
 public class CurrentWeatherRepository {
     private OpenWeatherMapApi openWeatherMapApi;
 
-    public CurrentWeatherRepository(OpenWeatherMapApi openWeatherMapApi) {
+    @Inject
+    CurrentWeatherRepository(OpenWeatherMapApi openWeatherMapApi) {
         this.openWeatherMapApi = openWeatherMapApi;
     }
 
