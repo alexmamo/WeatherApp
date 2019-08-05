@@ -38,6 +38,7 @@ dependencies {
     implementation deps.retrofit2.adapterRxJava2
     implementation deps.retrofit2.converterGson
     implementation deps.images.glide
+    annotationProcessor deps.images.compiler
     implementation deps.lifecycle.arch
     annotationProcessor deps.lifecycle.arch
     implementation deps.dagger2.dagger
